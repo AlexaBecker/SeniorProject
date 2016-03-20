@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="coveApp">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoVE - Rerestack</title>
+  <!-- CSS Libraries -->
+  <!-- UI -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Visualization -->
+  <link rel="stylesheet" href="./lib/css/site.css">
+  <!-- JS Libraries -->
+  <!-- JQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!-- AngularJS -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+  <script src="./lib/js/angular/cove.js"></script>
+  <!-- Visualization -->
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="./lib/js/colony/arrows.js" charset="utf-8"></script>
+  <script src="./lib/js/colony/colony_view.js" charset="utf-8"></script>
+</head>
+
+<body ng-controller="bodyController">
+
+  <!-- Nav bar-->
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand">Colony Visualization</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!--<ul class="nav navbar-nav">
+          <li class="active"><a href="index.html">Home</a></li>
+        </ul>-->
+        <ul class="nav navbar-nav navbar-right"></ul>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" ng-click="logout()">Sign out</button>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" ng-click="showAuthForm()">Sign in</button>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <!-- Test placeholder-->
+  <div class="jumbotron">
+    <!--<button type="button" class="btn btn-default" ng-click="getColonyList()">Get List</button>-->
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="c in colony_list">
+        <span class="badge">{{c.control}}</span>
+        {{c.cid}}
+        <button type="button" class="btn btn-default" ng-click="getColonyData(c.cid)">Show</button>
+      </li>
+    </ul>
+  </div>
+
+  <div id="graph"></div>
+  <div id="mouseInfoDetails"></div>
+  <div id="mouseInfoLineage"></div>
+
+  <!-- Login form -->
+  <div id="auth-cover" style="display:{{auth_display}}">
+
+    <div role="tabpanel" id="auth">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#signin" aria-controls="signin" role="tab" data-toggle="tab">Sign in</a></li>
+        <li role="presentation"><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Sign up</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="signin">
+          <form class="form-auth">
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" id="inputUsername" class="form-control" placeholder="Username" autofocus="" ng-model="user.username">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password">
+            <label class="auth-message">{{signin_message}}</label>
+            <p>
+              <button class="btn btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+              <button class="btn btn-default btn-block" type="submit" ng-click="hideAuthForm()">Cancel</button>
+            </p>
+          </form>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="signup">
+          <label class="form-message">{{signup_message}}</label>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="verify()">Check</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
