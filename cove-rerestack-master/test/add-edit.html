@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS Lib -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- JS Lib -->
+  <script src="d3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="arrows.js"></script>
+  <script src="colony_view.js"></script>
+  <script src="init.js"></script>
+</head>
+<body>
+  <script>
+
+  var mouse = null;
+
+  function search() {
+    var miceData = CV.allMice;
+    console.log(miceData);
+    var mouse_id = document.getElementById('mouse_id').value;
+    mouse = searchByMouseId(miceData, mouse_id);
+
+    if (mouse === null) {
+      window.alert("Unable to find mouse!");
+      return;
+    }
+
+    document.getElementById("DOB").value = mouse.dob;
+    document.getElementById("gender").value = mouse.gender;
+    document.getElementById("fatherId").value = mouse.fatherId;
+    document.getElementById("motherId").value = mouse.motherId;
+    document.getElementById("gene1").value = mouse.gene1;
+    document.getElementById("gene2").value = mouse.gene2;
+    document.getElementById("gene3").value = mouse.gene3;
+    document.getElementById("genotype1").value = mouse.genotype1;
+    document.getElementById("genotype2").value = mouse.genotype2;
+    document.getElementById("genotype3").value = mouse.genotype3;
+  };
+
+  function updateMouse() {
+    if (mouse === null) {
+      window.alert("Please search for a mouse.");
+      return;
+    }
+
+
+    mouse.dob = document.getElementById("DOB").value;
+    mouse.dobYear = parseInt(document.getElementById("DOB").value.substring(0,4));
+    mouse.dobMonth = parseInt(document.getElementById("DOB").value.substring(4,6));
+    mouse.dobDay = parseInt(document.getElementById("DOB").value.substring(6,8));
+    mouse.gender = document.getElementById("gender").value;
+    mouse.fatherId = document.getElementById("fatherId").value;
+    mouse.motherId = document.getElementById("motherId").value;
+    mouse.gene1 = document.getElementById("gene1").value;
+    mouse.gene2 = document.getElementById("gene2").value;
+    mouse.gene3 = document.getElementById("gene3").value;
+    mouse.genotype1 = document.getElementById("genotype1").value;
+    mouse.genotype2 = document.getElementById("genotype2").value;
+    mouse.genotype3 = document.getElementById("genotype3").value;
+  }
+
+  function searchByMouseId(data, id) {
+    for (var i = 0; i < data.length; i ++) {
+      for (var j = 0; j < data[i].length; j ++) {
+        if (data[i][j].mouseId === id) {
+          console.log(data[i][j]);
+          return data[i][j];
+        }
+      }
+    }
+
+    return null;
+  };
+
+  </script>
+  <div>
+  <input type='text' id='mouse_id' value=''>
+    <input type='button' id='id_str' value='Search' onClick = 'search()'>
+  </div>
+
+  <div>
+  <input type='text' id='DOB' value=''>DOB
+
+  <input type='text' id='gender' value=''>Gender
+  </div>
+
+  <div>
+  <input type='text' id='fatherId' value=''>Father ID
+
+  <input type='text' id='motherId' value=''>Mother ID
+  </div>
+
+  <div>
+  <input type='text' id='gene1' value=''>Gene1
+
+  <input type='text' id='gene2' value=''>Gene2
+
+  <input type='text' id='gene3' value=''>Gene3
+  </div>
+
+  <div>
+  <input type='text' id='genotype1' value=''>Genotype 1
+
+  <input type='text' id='genotype2' value=''>Genotype 2
+
+  <input type='text' id='genotype3' value=''>Genotype 3
+  </div>
+
+  <div>
+  <input type='button' id='id_str' value='Update' onClick = 'updateMouse()'>
+  <input type='button' id='id_str' value='Add' onClick = 'updateMouse()'>
+  </div>
+
+</body>
+</html>
