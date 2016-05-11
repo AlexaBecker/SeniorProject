@@ -87,13 +87,24 @@
             <label class="auth-message">{{signin_message}}</label>
             <p>
               <button class="btn btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+
               <button class="btn btn-default btn-block" type="submit" ng-click="hideAuthForm()">Cancel</button>
             </p>
           </form>
         </div>
         <div role="tabpanel" class="tab-pane" id="signup">
-          <label class="form-message">{{signup_message}}</label>
-          <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="verify()">Check</button>
+	<label for="inputFirstName" class="sr-only">First Name</label>
+            <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" autofocus="" ng-model="user.firstname">
+            <label for="inputLastName" class="sr-only">Last Name</label>
+            <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" ng-model="user.lastname">
+
+          <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" id="inputUsername" class="form-control" placeholder="Username" autofocus="" ng-model="user.username">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="verify()">Register</button>
+
+<button class="btn btn-default btn-block" type="submit" ng-click="hideAuthForm()">Cancel</button>
         </div>
       </div>
     </div>
